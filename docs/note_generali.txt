@@ -1,0 +1,16 @@
+Contenuto del file:
+
+  1. Modifica codice del primo parziale
+
+
+
+
+
+1. MODIFICA CODICE DEL PRIMO PARZIALE
+
+  Il codice delle classi consegnate per il primo parziale sono state modificate,
+seppure in maniera estremamente marginale. In particolare:
+
+    - In tutte le classi è stato aggiunto il package (per semplificare il testing con JUnit)
+    - Nella classe Comment.java è stato aggiunto il metodo toString()
+    - Nella classe Connection.java:194 è stata corretta la linea di codice che utilizza Comment:toString().
