@@ -14,6 +14,7 @@ public class CommentTest {
 
   private Comment comment0;
   private Comment comment1;
+  private Comment wrongComment;
 
   @Before
   public void setUp() {
@@ -42,7 +43,7 @@ public class CommentTest {
   @Test
   public void toStringTest() {
     assertEquals("toString didn't work", "[" + author + "] " + comment, comment1.toString());
-    assertEquals("toString didn't work", "[]", comment0.toString());
+    assertEquals("toString didn't work", "[] ", comment0.toString());
   }
 
 }
