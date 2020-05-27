@@ -1,5 +1,8 @@
+// javac -cp junit-4.13.jar CommentTest.java
+// java -cp junit-4.13.jar;hamcrest-core-1.3.jar;. org.junit.runner.JUnitCore CommentTest
+
 import org.junit.*;
-import Comment;
+import primaprovainitinere.Comment;
 
 public class CommentTest {
 
