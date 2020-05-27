@@ -27,12 +27,9 @@ public class CommentTest {
 
   @Test
   public void builds() {
-    assertNull(new Comment(0, "", 0));
-    assertNull(new Comment(author, author, comment));
-    assertNull(new Comment(0, vote, comment));
     assertNotNull(comment0);
     assertNotNull(comment1);
-    assertFalse(comment1.equals(comment1_alt)); 
+    assertFalse(comment1.equals(comment1_alt));
   }
 
 
