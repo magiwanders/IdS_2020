@@ -30,4 +30,9 @@ public class Comment
         return author;
     }
 
+    // Non presente nel codice del primo parziale, vedere Connection.java:194 per la modifica che l'aggiunta di questo metodo ha provocato.
+    synchronized public String toString() {
+      return "[" + author + "] " + comment;
+    }
+
 }

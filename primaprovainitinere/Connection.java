@@ -191,7 +191,8 @@ public class Connection implements Runnable {
         {
             Comment currentComment = chosenDiscussion.getComment(i);
             outClient.println(currentComment.getVote());
-            outClient.println("[" + currentComment.getAuthor() + "] " + currentComment.getBody());
+            outClient.println(currentComment.toString()); // Non presente nel codice del primo parziale, sostituisce la stringa sotto.
+            //outClient.println("[" + currentComment.getAuthor() + "] " + currentComment.getBody());
         }
         log("ha richiesto la lista dei commenti di '" + chosenDiscussion.getTitle() + "'.");
     }
