@@ -1,3 +1,4 @@
+// Dalla cartella primaprovainitinere:
 // javac -cp .:test/junit-4.13.jar test/CommentTest.java
 // java -cp .:test/junit-4.13.jar:test/hamcrest-core-1.3.jar org.junit.runner.JUnitCore test.CommentTest
 package test;
@@ -13,14 +14,27 @@ public class CommentTest {
   private int vote = 7;
 
   private Comment comment0;
+  private Comment comment1_alt;
   private Comment comment1;
   private Comment wrongComment;
 
   @Before
   public void setUp() {
     comment0 = new Comment("", 0, "");
+    comment1_alt = new Comment(author + "_alt", vote, comment);
     comment1 = new Comment(author, vote, comment);
   }
+
+  @Test
+  public void builds() {
+    assertNull(new Comment(0, "", 0));
+    assertNull(new Comment(author, author, comment));
+    assertNull(new Comment(0, vote, comment));
+    assertNotNull(comment0);
+    assertNotNull(comment1);
+    assertFalse(comment1.equals(comment1_alt)); 
+  }
+
 
   @Test
   public void getAuthorTest() {
