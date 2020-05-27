@@ -13,4 +13,25 @@ public class CommentTest {
     Comment comment011 = new Comment("", vote, comment);
     Commetn comment101 = new Comment(author, 0, comment);
   }
+
+  @Test
+  public void getAuthorTest() {
+    assertEquals("TestAuthor", comment111.getAuthor());
+  }
+/*
+  @Test
+  public void getVoteTest() {
+
+  }
+
+  @Test
+  public void getCommentTest() {
+
+  }
+
+  @Test
+  public void toStringTest() {
+
+  }
+  */
 }
