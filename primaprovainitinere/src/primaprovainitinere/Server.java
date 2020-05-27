@@ -3,7 +3,7 @@
  * Nome: Simone Shawn Cazzaniga
  * Matricola: 952966
  *****************************************************************************/
-package primaprovainitinere;
+package src.primaprovainitinere;
 
 import java.io.*;
 import java.util.*;
