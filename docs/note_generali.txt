@@ -1,6 +1,7 @@
 Contenuto del file:
 
   1. Modifica codice del primo parziale
+  2. Criteri test JUnit
 
 
 
@@ -8,9 +9,26 @@ Contenuto del file:
 
 1. MODIFICA CODICE DEL PRIMO PARZIALE
 
-  Il codice delle classi consegnate per il primo parziale sono state modificate,
+Il codice delle classi consegnate per il primo parziale è stato modificato,
 seppure in maniera estremamente marginale. In particolare:
 
     - In tutte le classi è stato aggiunto il package (per semplificare il testing con JUnit)
-    - Nella classe Comment.java è stato aggiunto il metodo toString()
-    - Nella classe Connection.java:194 è stata corretta la linea di codice che utilizza Comment:toString().
+    - Comment.java
+        - è stato aggiunto il metodo toString() per maggiore "correttezza concettuale."
+    - Connection.java
+        - :194 viene ora utilizzata Comment:toString().
+
+
+
+2. CRITERI TEST JUnit
+
+Le classi di test sono state eseguite in quest'ordine:
+  1. CommentTest.java
+  2. DiscussionTest.java
+  3. CredentialsListTest.java
+  4. ServerTest.java
+  5. ConnectionTest.java
+
+L'ordine è stato definito dal fatto che Connection.java è la classe più complessa,
+quindi mi risultava comodo testare tutte le classi sia a valle che a monte per
+non dover creare stub/drivers complessi.
