@@ -79,48 +79,10 @@ public class Server
     }
 
 
-    // METODI DI INIZIALIZZAZIONE (per aggiungere utenti e discussioni predefinite.)
-
-    private String [] presetUserList()
-    {
-        String [] presetUserList = {"user0",
-                                    "user1",
-                                    "user2",
-                                    "user3",
-                                    "user4",
-                                    "user5",
-                                    "user6",
-                                    "user7",
-                                    "user8",
-                                    "user9",
-                                    "magi",
-                                    "gospodin",
-                                    "a1fa,num3r1c0'"};
-        return presetUserList;
-    }
-
-    private String [] presetPasswordList()
-    {
-        String [] presetPasswordList = {"psw0",
-                                        "psw1",
-                                        "psw2",
-                                        "psw3",
-                                        "psw4",
-                                        "psw5",
-                                        "psw6",
-                                        "psw7",
-                                        "psw8",
-                                        "psw9",
-                                        "magi245676531",
-                                        "pulsoreplicazione",
-                                        "pswA14a,numer1c@''"};
-        return presetPasswordList;
-    }
+    // INIZIALIZZAZIONE
 
     private void initialize()
     {
-        users = new CredentialsList(presetUserList(), presetPasswordList());
-
         Discussion d1 = new Discussion("Rossi", "Notizia generica prima.");
         d1.leaveComment("user0", 2, "Non apprezzo.");
         d1.leaveComment("user8", 10, "Ottima notizia!");

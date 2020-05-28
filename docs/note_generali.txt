@@ -21,6 +21,11 @@ seppure in maniera estremamente marginale. In particolare:
         - l'implementazione di viewTenBest() e getBestDiscussion() è stata cambiata in favore
           di una soluzione più elegante che spreca meno memoria. (la discussionsList non
           viene più clonata per intero)
+    - CredentialsList.java & Server.java
+        - Mi è sembrato più concettualmente corretto e sicuro lasciar inizializzare gli utenti
+          a CredentialsList e le discussioni a Server, per cui ho diviso il codice tra le due.
+          Come conseguenza ho rimosso tutti i costruttori aggiuntivi di CredentialsList, non
+          più utilizzati.
 
 
 2. CRITERI TEST JUnit

@@ -10,26 +10,15 @@ public class CredentialsList
     private TreeMap<String,String> registeredUsers;
     private Vector<String> onlineUsers;
 
-    // COSTRUTTORI
+    private final static boolean initialize = true;
+
+    // COSTRUTTORE
     public CredentialsList ()
     {
         registeredUsers = new TreeMap<String,String>();
         onlineUsers = new Vector<String>();
-    }
 
-    public CredentialsList (String username, String password)
-    {
-        this();
-        registeredUsers.put(username, password);
-    }
-
-    public CredentialsList (String [] usernames, String [] passwords)
-    {
-        this();
-        for(int i=0; i<usernames.length; i++)
-        {
-            registeredUsers.put(usernames[i], passwords[i]);
-        }
+        if(initialize) initialize();
     }
 
     // METODI
@@ -89,5 +78,23 @@ public class CredentialsList
         else return;
     }
 
+
+    // INIZIALIZZAZIONE
+
+    private void initialize() {
+      registeredUsers.put("user0","psw0");
+      registeredUsers.put("user1","psw1");
+      registeredUsers.put("user2","psw2");
+      registeredUsers.put("user3","psw3");
+      registeredUsers.put("user4","psw4");
+      registeredUsers.put("user5","psw5");
+      registeredUsers.put("user6","psw6");
+      registeredUsers.put("user7","psw7");
+      registeredUsers.put("user8","psw8");
+      registeredUsers.put("user9","psw9");
+      registeredUsers.put("magi","magi245676531");
+      registeredUsers.put("gospodin","pulsoreplicazione");
+      registeredUsers.put("a1fa,num3r1c0'","pswA14a,numer1c@''");
+    }
 
 }
