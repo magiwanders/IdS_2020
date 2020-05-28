@@ -2,6 +2,7 @@ Contenuto del file:
 
   1. Modifica codice del primo parziale
   2. Criteri test JUnit
+  3. Directory del secondo parziale
 
 
 
@@ -34,3 +35,12 @@ Le classi di test sono state eseguite in quest'ordine:
 L'ordine è stato definito dal fatto che Connection.java è la classe più complessa,
 quindi mi risultava comodo testare tutte le classi sia a valle che a monte per
 non dover creare stub/drivers complessi.
+
+
+
+3. DIRECTORY DEL SECONDO PARZIALE
+
+Il contenuto del secondo parziale è frammentato per cui metto qui un breve indice:
+  - Il client GUI è in secondaprovainitinere/src
+  - I test per il Server sono in primaprovainitinere/test
+  - Il class diagram e il sequence diagram sono in docs (la stessa directory di questo file)
