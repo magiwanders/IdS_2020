@@ -136,7 +136,7 @@ public class Connection implements Runnable {
             }
             else
             {
-                outClient.println("0");
+                outClient.println("0"); // Numero dei commenti dummy
             }
         }
         catch(Exception e)
@@ -193,8 +193,7 @@ public class Connection implements Runnable {
         {
             Comment currentComment = chosenDiscussion.getComment(i);
             outClient.println(currentComment.getVote());
-            outClient.println(currentComment.toString()); // Non presente nel codice del primo parziale, sostituisce la stringa sotto.
-            //outClient.println("[" + currentComment.getAuthor() + "] " + currentComment.getBody());
+            outClient.println(currentComment.toString());
         }
         log("ha richiesto la lista dei commenti di '" + chosenDiscussion.getTitle() + "'.");
     }
@@ -204,15 +203,16 @@ public class Connection implements Runnable {
         try
         {
             log("ha richiesto le 10 migliori discussioni.");
-            Vector<Discussion> discussionsClone = (Vector<Discussion>) discussionsList.clone(); // Unchecked casting, ma nel mio codice una discussionList può solo essere un Vector<Discussion>.
-            int i;
-            for(i=0; i<Math.min(10, discussionsList.size()); i++)
+            int tenOrLess = Math.min(10, discussionsList.size()); // Se ci sono meno di 10 discussioni in totale, la lista sarà più corta di 10.
+            Vector<Discussion> discussionsToIgnore = new Vector<Discussion>();
+
+            for(int i=0; i<tenOrLess; i++)
             {
-                Discussion bestDiscussion = getBestDiscussion(discussionsClone);
-                outClient.println(bestDiscussion.toString());
-                discussionsClone.removeElement(bestDiscussion);
+                Discussion bestDiscussionLeft = getBestDiscussion(discussionsToIgnore);
+                outClient.println(bestDiscussionLeft.toString());
+                discussionsToIgnore.add(bestDiscussionLeft);
             }
-            if(i<10) outClient.println("FINE");
+            if(tenOrLess<10) outClient.println("FINE");
         }
         catch(Exception e)
         {
@@ -222,20 +222,24 @@ public class Connection implements Runnable {
         }
     }
 
-    private Discussion getBestDiscussion(Vector<Discussion> currentList)
-    { // Ritorna la discussione con la media dei voti più alta tra quelle passate alla funzione.
+    private Discussion getBestDiscussion(Vector<Discussion> discussionsToIgnore)
+    {
         float highestSoFar = 0;
         int indexOfHighest = 0;
-        for(int i=0; i<currentList.size();i++)
+        for(int i=0; i<discussionsList.size();i++)
         {
-            float candidateToHighest = currentList.elementAt(i).getAverageOfVotes();
-            if(candidateToHighest > highestSoFar)
-            {
-                highestSoFar = candidateToHighest;
-                indexOfHighest = i;
-            }
+          Discussion currentDiscussion = discussionsList.elementAt(i);
+          if(!discussionsToIgnore.contains(currentDiscussion))
+          {
+              float candidateToHighest = currentDiscussion.getAverageOfVotes();
+              if(candidateToHighest > highestSoFar)
+              {
+                  highestSoFar = candidateToHighest;
+                  indexOfHighest = i;
+              }
+          }
         }
-        return currentList.elementAt(indexOfHighest);
+        return discussionsList.elementAt(indexOfHighest);
     }
 
     private void exit()

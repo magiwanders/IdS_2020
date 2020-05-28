@@ -17,11 +17,13 @@ seppure in maniera estremamente marginale. In particolare:
         - è stato aggiunto il metodo toString() per maggiore "correttezza concettuale."
     - Connection.java
         - :194 viene ora utilizzata Comment:toString().
-
+        - l'implementazione di viewTenBest() e getBestDiscussion() è stata cambiata in favore
+          di una soluzione più elegante che spreca meno memoria. (la discussionsList non
+          viene più clonata per intero)
 
 
 2. CRITERI TEST JUnit
- 
+
 Le classi di test sono state eseguite in quest'ordine:
   1. CommentTest.java
   2. DiscussionTest.java
