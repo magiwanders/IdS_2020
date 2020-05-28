@@ -10,10 +10,8 @@ public class CredentialsList
     private TreeMap<String,String> registeredUsers;
     private Vector<String> onlineUsers;
 
-    private final static boolean initialize = true;
-
     // COSTRUTTORE
-    public CredentialsList ()
+    public CredentialsList (boolean initialize)
     {
         registeredUsers = new TreeMap<String,String>();
         onlineUsers = new Vector<String>();

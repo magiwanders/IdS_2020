@@ -28,7 +28,7 @@ public class Server
         System.out.println("Server avviato.");
 
         discussionsList = new Vector<Discussion>();
-        users = new CredentialsList();
+        users = new CredentialsList(initialize);
 
         if(initialize) initialize(); // Inizializza una decina di utenti e una decina di discussioni con qualche commento.
 
