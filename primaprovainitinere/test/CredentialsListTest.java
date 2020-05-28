@@ -2,14 +2,17 @@ package test;
 
 import org.junit.*;
 import static org.junit.Assert.*;
-import src.primaprovainitinere.Comment;
-import src.primaprovainitinere.Discussion;
+import src.primaprovainitinere.CredentialsList;
 import java.util.*;
 
 public class CredentialsListTest {
 
-  CredentialsList dummyUsers;
   CredentialsList emptyList;
+
+  String user1 = "Giorgio";
+  String psw1 = "giorgiopassword";
+  String user2 = "Piero";
+  String psw2 = "pieropassword";
 
   @Before
   public void setUp() {
@@ -17,12 +20,14 @@ public class CredentialsListTest {
   }
 
   @Test
-  public void emptyTest() {
-    
+  public void loginAttemptEmptyTest() {
+    assertTrue(emptyList.loginAttempt(user1, psw1)); // New User
+    assertFalse(emptyList.loginAttempt(user1, psw1)); // Already logged
+    emptyList.logout(user1);
+    assertFalse(emptyList.loginAttempt(user1, psw2)); // Wrong password
+    assertTrue(emptyList.loginAttempt(user2, psw2)); // New user not empty
+    assertTrue(emptyList.loginAttempt(user1, psw1)); // OldUser
+    assertFalse(emptyList.loginAttempt(user2, psw2)); // Already logged
   }
 
-  @Test
-  public void loginAttemptTest() {
-    emptyList.loginAttempt("user1", "password1");
-  }
 }
