@@ -34,12 +34,10 @@ Le classi di test sono state eseguite in quest'ordine:
   1. CommentTest.java
   2. DiscussionTest.java
   3. CredentialsListTest.java
-  4. ServerTest.java
-  5. ConnectionTest.java
+  6. ConnectionTest.java
 
-L'ordine è stato definito dal fatto che Connection.java è la classe più complessa,
-quindi mi risultava comodo testare tutte le classi sia a valle che a monte per
-non dover creare stub/drivers complessi.
+Testare il server è banale, nel momento in cui a ogni classe viene correttamente dato il
+proprio thread.
 
 
 

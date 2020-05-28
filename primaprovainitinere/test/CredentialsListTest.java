@@ -7,12 +7,12 @@ import java.util.*;
 
 public class CredentialsListTest {
 
-  CredentialsList emptyList;
+  private CredentialsList emptyList;
 
-  String user1 = "Giorgio";
-  String psw1 = "giorgiopassword";
-  String user2 = "Piero";
-  String psw2 = "pieropassword";
+  private String user1 = "Giorgio";
+  private String psw1 = "giorgiopassword";
+  private String user2 = "Piero";
+  private String psw2 = "pieropassword";
 
   @Before
   public void setUp() {
