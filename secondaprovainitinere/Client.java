@@ -1,6 +1,7 @@
 // export PATH_TO_FX=javafx/lib
 // javac --module-path $PATH_TO_FX --add-modules javafx.controls HelloFX.java
 // java --module-path $PATH_TO_FX --add-modules javafx.controls HelloFX
+package secondaprovainitinere;
 
 import javafx.application.*;
 import javafx.stage.*;

@@ -1,9 +1,11 @@
+package secondaprovainitinere;
+
 import javafx.application.*;
 import javafx.stage.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.event.* ;
+import javafx.event.*;
 
 public class LoginUI extends TwoFieldsWindow {
 
