@@ -5369,6 +5369,71 @@
 							"ownedViews": [
 								{
 									"_type": "RectangleView",
+									"_id": "AAAAAAFygWcZ151HJ98=",
+									"_parent": {
+										"$ref": "AAAAAAFyf20v5oRrtLg="
+									},
+									"font": "Arial;13;0",
+									"left": 8,
+									"top": 32,
+									"width": 1889,
+									"height": 3545
+								},
+								{
+									"_type": "UMLFrameView",
+									"_id": "AAAAAAFyf20v54Rss1U=",
+									"_parent": {
+										"$ref": "AAAAAAFyf20v5oRrtLg="
+									},
+									"model": {
+										"$ref": "AAAAAAFyf20v5oRrtLg="
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAFyf20v54Rt5Is=",
+											"_parent": {
+												"$ref": "AAAAAAFyf20v54Rss1U="
+											},
+											"fillColor": "#ffffd8",
+											"fontColor": "#ff0000",
+											"font": "Arial;13;0",
+											"left": 70.97900390625,
+											"top": 5,
+											"width": 108.67529296875,
+											"height": 13,
+											"text": "SequenceDiagram"
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAFyf20v6IRuOZ8=",
+											"_parent": {
+												"$ref": "AAAAAAFyf20v54Rss1U="
+											},
+											"fillColor": "#ffffd8",
+											"fontColor": "#ff0000",
+											"font": "Arial;13;1",
+											"left": 5,
+											"top": 5,
+											"width": 60.97900390625,
+											"height": 13,
+											"text": "interaction"
+										}
+									],
+									"fillColor": "#ffffd8",
+									"fontColor": "#ff0000",
+									"font": "Arial;13;0",
+									"width": 1913,
+									"height": 3585,
+									"nameLabel": {
+										"$ref": "AAAAAAFyf20v54Rt5Is="
+									},
+									"frameTypeLabel": {
+										"$ref": "AAAAAAFyf20v6IRuOZ8="
+									}
+								},
+								{
+									"_type": "RectangleView",
 									"_id": "AAAAAAFygT7R25qgBZA=",
 									"_parent": {
 										"$ref": "AAAAAAFyf20v5oRrtLg="
@@ -5444,56 +5509,6 @@
 									"top": 272,
 									"width": 304,
 									"height": 3305
-								},
-								{
-									"_type": "UMLFrameView",
-									"_id": "AAAAAAFyf20v54Rss1U=",
-									"_parent": {
-										"$ref": "AAAAAAFyf20v5oRrtLg="
-									},
-									"model": {
-										"$ref": "AAAAAAFyf20v5oRrtLg="
-									},
-									"subViews": [
-										{
-											"_type": "LabelView",
-											"_id": "AAAAAAFyf20v54Rt5Is=",
-											"_parent": {
-												"$ref": "AAAAAAFyf20v54Rss1U="
-											},
-											"fontColor": "#ff0000",
-											"font": "Arial;13;0",
-											"left": 70.97900390625,
-											"top": 5,
-											"width": 108.67529296875,
-											"height": 13,
-											"text": "SequenceDiagram"
-										},
-										{
-											"_type": "LabelView",
-											"_id": "AAAAAAFyf20v6IRuOZ8=",
-											"_parent": {
-												"$ref": "AAAAAAFyf20v54Rss1U="
-											},
-											"fontColor": "#ff0000",
-											"font": "Arial;13;1",
-											"left": 5,
-											"top": 5,
-											"width": 60.97900390625,
-											"height": 13,
-											"text": "interaction"
-										}
-									],
-									"fontColor": "#ff0000",
-									"font": "Arial;13;0",
-									"width": 1913,
-									"height": 3585,
-									"nameLabel": {
-										"$ref": "AAAAAAFyf20v54Rt5Is="
-									},
-									"frameTypeLabel": {
-										"$ref": "AAAAAAFyf20v6IRuOZ8="
-									}
 								},
 								{
 									"_type": "UMLSeqLifelineView",
