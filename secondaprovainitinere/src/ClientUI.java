@@ -155,6 +155,8 @@ public class ClientUI extends Stage {
   public int updateSelectedArticle() {
     try {
       String current = listContainer.getSelectionModel().getSelectedItem();
+      int currentNumber = indexOf(current);
+      setSelected(currentNumber);
       return indexOf(current);
     } catch (Exception e) {
       selectedArticle.setText("1");
@@ -164,10 +166,6 @@ public class ClientUI extends Stage {
 
   public int getSelectedArticle() {
     return Integer.parseInt(selectedArticle.getText());
-  }
-
-  public void setSelectedArticle(int n) {
-    selectedArticle.setText(Integer.toString(n));
   }
 
   public int indexOf(String current) {

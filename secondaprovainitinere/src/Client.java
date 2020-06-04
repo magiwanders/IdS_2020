@@ -212,8 +212,8 @@ public class Client extends Application {
       if (fieldsNotEmpty(autore, titolo)) {
         sendToServer("aggiungi", autore, titolo);
         addArticleUI.close();
-        clientUI.setSelected(clientUI.getLastArticle());
-        showNewsList("no", clientUI.getLastArticle(), true, true);
+        clientUI.setSelected(clientUI.getLastArticle()+1);
+        showNewsList("no", clientUI.getLastArticle()+1, true, true);
       } else addArticleUI.getErrorLabel().setText("Author or title left blank.");
     }
 
@@ -235,7 +235,6 @@ public class Client extends Application {
     private void listHandle() {
       if(!clientUI.isDisplayingTopTen()) {
         int selected = clientUI.updateSelectedArticle();
-        clientUI.setSelected(selected);
         showComments(selected);
       }
     }
