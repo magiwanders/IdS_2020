@@ -1,6 +1,6 @@
 // Dalla cartella IdS_2020:
 // javac -cp .:primaprovainitinere/test/junit-4.13.jar primaprovainitinere/test/CommentTest.java
-// java -cp .:primaprovainitinere/test/junit-4.13.jar:test/hamcrest-core-1.3.jar org.junit.runner.JUnitCore test.CommentTest
+// java -cp .:primaprovainitinere/test/junit-4.13.jar:test/hamcrest-core-1.3.jar org.junit.runner.JUnitCore primaprovainitinere.test.CommentTest
 package primaprovainitinere.test;
 
 import org.junit.*;
