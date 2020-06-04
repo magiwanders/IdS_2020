@@ -1,4 +1,4 @@
-package test;
+package primaprovainitinere.test;
 
 import java.io.*;
 import java.util.*;

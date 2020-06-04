@@ -1,4 +1,4 @@
-package test;
+package primaprovainitinere.test;
 
 import org.junit.*;
 import static org.junit.Assert.*;
