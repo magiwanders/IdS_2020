@@ -9,7 +9,7 @@ import src.primaprovainitinere.*;
 
 public class ConnectionTest {
 
-  private Server server;
+  private ServerDummy server;
   private Thread serverT;
   private ClientDummy clientDummy;
   private Thread clientDummyT;
@@ -23,25 +23,32 @@ public class ConnectionTest {
   private Vector<Discussion> discussionsList;
   private CredentialsList users;
 
+  private static boolean firstTime = true;
+
   @Before
   public void setUp() {
     try {
+      System.out.println("1. Inizio setUp()");
       discussionsList = new Vector<Discussion>();
       users = new CredentialsList(false);
       results = new Vector<String>();
-
-      server = new Server();
+      server = new ServerDummy();
       clientDummy = new ClientDummy(results);
 
-      serverT = new Thread(server);
-      serverT.start();
+      if(firstTime) {
+        firstTime = false;
+        serverT = new Thread(server);
+        serverT.start();
+        clientDummyT = new Thread(clientDummy);
+        clientDummyT.start();
 
-      clientDummyT = new Thread(clientDummy);
-      clientDummyT.start();
-
-      connection = new Connection(discussionsList, users, server.getSocket());
-      connectionT = new Thread(connection);
-      connectionT.start();
+        connection = new Connection(discussionsList, users, server.getSocket());
+        connectionT = new Thread(connection);
+        System.out.println("6. Inizio thread Connection");
+        connectionT.start();
+      } else {
+        connection = new Connection(discussionsList, users, server.getSocket());
+      }
     } catch (Exception e) {
       fail();
     }
@@ -50,41 +57,53 @@ public class ConnectionTest {
   @Test
   public void loginTest() {
     assertTrue(clientDummy.login("nuovoutente", "lapassword"));
-    System.out.println("eccalo");
     clientDummy.disconnect();
   }
 
   @Test
   public void emptyTest() {
+    System.out.println(clientDummy + "era il calient");
+    assertFalse(clientDummy.login("nuovoutente", "lapasswordsbagliata"));
+    assertTrue(clientDummy.login("nuovoutente", "lapassword"));
     clientDummy.comment("0", "no");
     clientDummy.topTen();
     assertTrue(results.isEmpty());
   }
-
+/*
   @Test
   public void populateTest() {
     clientDummy.add("Giovanni", "Notizia1");
     clientDummy.add("Giovanni", "Notizia1");
     clientDummy.add("Giovanni", "Notizia1");
+  }*/
+
+  @After
+  public void closeAll() {
+    try {
+      server.close();
+    } catch (Exception e) {
+      fail();
+    }
   }
 }
 
-class Server implements Runnable {
+class ServerDummy implements Runnable {
 
   private final static int PORT=3000;
   private ServerSocket server;
   private Socket client;
 
-  public Server() {
-    try {
-      server = new ServerSocket(PORT);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+  public ServerDummy() {
+    System.out.println("2. Creo ServerDummy...");
   }
 
   public void run() {
+    System.out.println("6. Inizio thread Server");
+  }
+
+  public void initialize() {
     try {
+      server = new ServerSocket(PORT);
       System.out.println("In ascolto del client");
       client = server.accept();
     } catch (Exception e) {
@@ -101,6 +120,14 @@ class Server implements Runnable {
     System.out.println("Restituisco Socket");
     return client;
   }
+
+  public void close() {
+    try {
+      server.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
 }
 
 class ClientDummy implements Runnable {
@@ -115,17 +142,22 @@ class ClientDummy implements Runnable {
     private BufferedReader inSocket;
 
     public ClientDummy(Vector<String> results) {
+      System.out.println("3. Creo ClientDummy");
       this.results = results;
     }
 
     public void run(){
+      System.out.println("6. Inizio thread Client");
+    }
+
+    private void initialize() {
       try
       {
-        System.out.println("Il client tenta di connettersi");
-          socket = new Socket(address, PORT);
-          inSocket = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-          outSocket = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
-          System.out.println("Client connesso");
+        System.out.println("4. Connetto ClientDummy a ServerDummy.");
+        socket = new Socket(address, PORT);
+        inSocket = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        outSocket = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
+        System.out.println("5. Client connesso.");
       }
       catch(Exception e)
       {
@@ -210,5 +242,11 @@ class ClientDummy implements Runnable {
 
     public void disconnect() {
       send("fine");
+      try {
+        socket.close();
+        Thread.sleep(1000);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
     }
 }
