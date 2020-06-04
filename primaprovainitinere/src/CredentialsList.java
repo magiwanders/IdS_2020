@@ -1,4 +1,4 @@
-package src.primaprovainitinere;
+package primaprovainitinere.src;
 
 import java.io.*;
 import java.util.*;
