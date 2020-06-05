@@ -232,7 +232,8 @@ public class Connection implements Runnable {
           if(!discussionsToIgnore.contains(currentDiscussion))
           {
               float candidateToHighest = currentDiscussion.getAverageOfVotes();
-              if(candidateToHighest > highestSoFar)
+              if (Float.isNaN(candidateToHighest)) candidateToHighest = 0;
+              if(candidateToHighest >= highestSoFar)
               {
                   highestSoFar = candidateToHighest;
                   indexOfHighest = i;
