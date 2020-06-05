@@ -17,15 +17,22 @@ seppure in maniera estremamente marginale. In particolare:
     - Comment.java
         - è stato aggiunto il metodo toString() per maggiore "correttezza concettuale."
     - Connection.java
-        - :194 viene ora utilizzata Comment:toString().
+        - :194 viene ora utilizzato Comment:toString().
         - l'implementazione di viewTenBest() e getBestDiscussion() è stata cambiata in favore
           di una soluzione più elegante che spreca meno memoria. (la discussionsList non
           viene più clonata per intero)
     - CredentialsList.java & Server.java
-        - Mi è sembrato più concettualmente corretto e sicuro lasciar inizializzare gli utenti
-          a CredentialsList e le discussioni a Server, per cui ho diviso il codice tra le due.
-          Come conseguenza ho rimosso tutti i costruttori aggiuntivi di CredentialsList, non
-          più utilizzati.
+        - Mi è sembrato più concettualmente corretto e sicuro lasciar inizializzare la lista
+          predefinita di utenti alla classe CredentialsList e le discussioni alla classe
+          Server, per cui ho diviso il codice tra le due. Come conseguenza ho rimosso tutti
+          i costruttori aggiuntivi di CredentialsList, non più utilizzati, e spostato il
+          codice di inizializzazione nelle rispettive classi.
+    - Server.java
+        - Il compilato Server.class nella prima prova in itinere era stato consegnato con la
+          variabile "initialize=true" di default. Nel secondo parziale viene consegnato
+          compilato con "initialize=false" poichè è un'ipotesi del test globale. Il codice
+          per l'inizializzazione è rimasto invariato per cui basta ricompilare con
+          "initialize=true" nel caso si vogliano .
 
 
 2. CRITERI TEST JUnit
@@ -34,10 +41,10 @@ Le classi di test sono state eseguite in quest'ordine:
   1. CommentTest.java
   2. DiscussionTest.java
   3. CredentialsListTest.java
-  6. ConnectionTest.java
+  4. ServerTest.java
 
-Testare il server è banale, nel momento in cui a ogni classe viene correttamente dato il
-proprio thread.
+Dopo aver eseguito i test singoli sulla struttura dati (1-3) sono passato a un test globale (4).
+IMPORTANTE: è necessario eseguire il server subito prima di eseguire il test.
 
 
 
