@@ -15,7 +15,7 @@ public class ServerTest {
   private final static int PORT=3000;
   private final static String address="localhost";
 
-  private final static int NUMBER_OF_TEST_SOCKETS=10;
+  private final static int NUMBER_OF_TEST_SOCKETS=6;
 
   private Socket [] socket = new Socket[NUMBER_OF_TEST_SOCKETS];
   private BufferedReader [] inSocket = new BufferedReader[NUMBER_OF_TEST_SOCKETS];
@@ -227,11 +227,163 @@ public class ServerTest {
       assertEquals("Voto: 9.0 | Di: Giovanni Paolo II. 'Beati... i secondi'", read());
       assertEquals("Voto: 8.5 | Di: Primo Levi. 'Se questa è una notizia'", read());
       assertEquals("FINE", read());
+      assertTrue(disconnect());
+      select(0);
+      assertTrue(disconnect());
+      select(2);
+      assertTrue(disconnect());
 
+    // INTERFERENZE (ogni socket contemporaneamente, tutte le combinazioni)
+      // Login durante login
+      select(0);
+      assertTrue(connect());
+      send("login");
+        select(1);
+        assertTrue(connect());
+        send("login");
+      select(0);
+      send("testUser");
+          select(2);
+          assertTrue(connect());
+          send("login", "testUser2", "testPassword2");
+          assertTrue(Boolean.valueOf(read()).booleanValue());
+      select(0);
+      send("testPassword");
+      assertTrue(Boolean.valueOf(read()).booleanValue());
+      // Add durante Login
+          select(2);
+          send("aggiungi");
+          // Login durante add
+              select(4);
+              assertTrue(connect());
+              send("login", "testUser4", "testPassword4");
+              assertTrue(Boolean.valueOf(read()).booleanValue());
+          select(2);
+          send("interferenza1", "add durante login");
+        select(1);
+        send("testUser1");
+      // TopTen durante Login
+      select(0);
+      send("migliori");
+              //Login durante Top Ten
+                select(5);
+                assertTrue(connect());
+                send("login", "testUser5", "testPassword5");
+                assertTrue(Boolean.valueOf(read()).booleanValue());
+      select(0);
+      assertEquals("Voto: 9.0 | Di: Giovanni Paolo II. 'Beati... i secondi'", read());
+      assertEquals("Voto: 8.5 | Di: Primo Levi. 'Se questa è una notizia'", read());
+      assertEquals("Voto: NaN | Di: interferenza1. 'add durante login'", read());
+      assertEquals("FINE", read());
+        select(1);
+        send("testPassword1");
+      // Commento durante Login
+          select(2);
+          send("discuti");
+          // Login durante Commento
+            select(3);
+            assertTrue(connect());
+            send("login", "testUser3", "testPassword3");
+            assertTrue(Boolean.valueOf(read()).booleanValue());
+          select(2);
+          assertEquals("3", read());
+          // Add durante Commento
+            select(3);
+            send("aggiungi");
+            // TopTen durante Add
+              select(4);
+              send("migliori");
+              assertEquals("Voto: 9.0 | Di: Giovanni Paolo II. 'Beati... i secondi'", read());
+              // TopTen durante TopTen
+                select(5);
+                send("migliori");
+                assertEquals("Voto: 9.0 | Di: Giovanni Paolo II. 'Beati... i secondi'", read());
+                assertEquals("Voto: 8.5 | Di: Primo Levi. 'Se questa è una notizia'", read());
+                assertEquals("Voto: NaN | Di: interferenza1. 'add durante login'", read());
+                assertEquals("FINE", read());
+              select(4);
+              assertEquals("Voto: 8.5 | Di: Primo Levi. 'Se questa è una notizia'", read());
+              // Comment durante topTen
+                select(5);
+                send("discuti");
+                assertEquals("3", read());
+                assertEquals("[N^1] Voto: 8.5 | Di: Primo Levi. 'Se questa è una notizia'", read());
+                assertEquals("[N^2] Voto: 9.0 | Di: Giovanni Paolo II. 'Beati... i secondi'", read());
+                assertEquals("[N^3] Voto: NaN | Di: interferenza1. 'add durante login'", read());
+                send("2");
+                assertEquals("1", read());
+                assertEquals("9", read());
+                assertEquals("[testUser] Santo padre, ha sbagliato citazione", read());
+                send("si", "10", "Santo");
+              select(4);
+              assertEquals("Voto: NaN | Di: interferenza1. 'add durante login'", read());
+              assertEquals("FINE", read());
+            select(3);
+            send("interferenza2");
+            // Comment durante Add
+              select(4);
+              send("discuti");
+              assertEquals("3", read());
+              assertEquals("[N^1] Voto: 8.5 | Di: Primo Levi. 'Se questa è una notizia'", read());
+              assertEquals("[N^2] Voto: 9.5 | Di: Giovanni Paolo II. 'Beati... i secondi'", read());
+              assertEquals("[N^3] Voto: NaN | Di: interferenza1. 'add durante login'", read());
+              send("3");
+              assertEquals("0", read());
+              send("si", "2", "Bugged");
+            select(3);
+            send("add durante commento");
+          select(2);
+          assertEquals("[N^1] Voto: 8.5 | Di: Primo Levi. 'Se questa è una notizia'", read());
+          // TopTen durante Commento
+            select(3);
+            send("migliori");
+            assertEquals("Voto: 9.5 | Di: Giovanni Paolo II. 'Beati... i secondi'", read());
+            assertEquals("Voto: 8.5 | Di: Primo Levi. 'Se questa è una notizia'", read());
+            assertEquals("Voto: 2.0 | Di: interferenza1. 'add durante login'", read());
+            assertEquals("Voto: NaN | Di: interferenza2. 'add durante commento'", read());
+            assertEquals("FINE", read());
+          select(2);
+          assertEquals("[N^2] Voto: 9.0 | Di: Giovanni Paolo II. 'Beati... i secondi'", read());
+          // Commento durante Commento
+            select(3);
+            send("discuti");
+            assertEquals("4", read());
+            assertEquals("[N^1] Voto: 8.5 | Di: Primo Levi. 'Se questa è una notizia'", read());
+            assertEquals("[N^2] Voto: 9.5 | Di: Giovanni Paolo II. 'Beati... i secondi'", read());
+            assertEquals("[N^3] Voto: 2.0 | Di: interferenza1. 'add durante login'", read());
+            assertEquals("[N^4] Voto: NaN | Di: interferenza2. 'add durante commento'", read());
+            send("4");
+            assertEquals("0", read());
+            send("si", "7", "Proprio come ho scritto");
+          select(2);
+          assertEquals("[N^3] Voto: NaN | Di: interferenza1. 'add durante login'", read());
+          send("4");
+          assertEquals("1", read());
+          assertEquals("7", read());
+          assertEquals("[testUser3] Proprio come ho scritto", read());
+          send("si", "9", "Niente male");
+        select(1);
+        assertTrue(Boolean.valueOf(read()).booleanValue());
 
-
-
-
+      // Test TopTen stops at ten
+        send("aggiungi", "Carlo V", "quinta");
+        send("aggiungi", "Sisto VI", "Sesta");
+        send("aggiungi", "Tolomeo VII", "settima");
+        send("aggiungi", "Enrico VIII", "ottava");
+        send("aggiungi", "Luigi IX", "nona");
+        send("aggiungi", "TolomeoX", "decima");
+        send("aggiungi", "Pio XI", "undicesima");
+        send("migliori");
+        assertEquals("Voto: 9.5 | Di: Giovanni Paolo II. 'Beati... i secondi'", read());
+        assertEquals("Voto: 8.5 | Di: Primo Levi. 'Se questa è una notizia'", read());
+        assertEquals("Voto: 8.0 | Di: interferenza2. 'add durante commento'", read());
+        assertEquals("Voto: 2.0 | Di: interferenza1. 'add durante login'", read());
+        assertEquals("Voto: NaN | Di: Pio XI. 'undicesima'", read());
+        assertEquals("Voto: NaN | Di: TolomeoX. 'decima'", read());
+        assertEquals("Voto: NaN | Di: Luigi IX. 'nona'", read());
+        assertEquals("Voto: NaN | Di: Enrico VIII. 'ottava'", read());
+        assertEquals("Voto: NaN | Di: Tolomeo VII. 'settima'", read());
+        assertEquals("Voto: NaN | Di: Sisto VI. 'Sesta'", read());
   }
 
   @After
