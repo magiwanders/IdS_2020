@@ -25,10 +25,10 @@ public class Client extends Application {
     private BufferedReader inKeyboard;
     private PrintWriter outVideo;
 
-    LoginUI loginUI;
-    ClientUI clientUI;
-    AddArticleUI addArticleUI;
-    AddCommentUI addCommentUI;
+    private LoginUI loginUI;
+    private ClientUI clientUI;
+    private AddArticleUI addArticleUI;
+    private AddCommentUI addCommentUI;
 
     private void connect() {
         try
@@ -94,6 +94,18 @@ public class Client extends Application {
       clientUI.getAddCommentButton().setOnAction( (e6) -> addCommentHandle());
     }
 
+    private void refreshAll() {
+      showNewsList("no", clientUI.getSelectedArticle(), true, true);
+    }
+
+    private void showNewsList() {
+      showNewsList("no", 1, true, true);
+    }
+
+    private void showNewsList(String wantToComment, int whatArticle, boolean REFRESH_ARTICLES, boolean REFRESH_COMMENTS) {
+      if(wantToComment.equals("no")) showNewsList(wantToComment, whatArticle, REFRESH_ARTICLES, REFRESH_COMMENTS, "", "");
+    }
+
     private void showNewsList(String wantToComment, int whatArticle, boolean REFRESH_ARTICLES, boolean REFRESH_COMMENTS, String vote, String comment) {
       sendToServer("discuti");
       retrieveArticles(REFRESH_ARTICLES);
@@ -127,21 +139,9 @@ public class Client extends Application {
       if(REFRESH_COMMENTS) clientUI.showAddCommentButton();
     }
 
-    private void showNewsList() {
-      showNewsList("no", 1, true, true);
-    }
-
-    private void showNewsList(String wantToComment, int whatArticle, boolean REFRESH_ARTICLES, boolean REFRESH_COMMENTS) {
-      if(wantToComment.equals("no")) showNewsList(wantToComment, whatArticle, REFRESH_ARTICLES, REFRESH_COMMENTS, "", "");
-    }
-
     private void showComments(int article) {
       showNewsList("no", article, false, true);
       clientUI.setSelected(article);
-    }
-
-    private void refreshAll() {
-      showNewsList("no", clientUI.getSelectedArticle(), true, true);
     }
 
     // Wrappers per la gestione delle eccezioni della comunicazione.
@@ -189,16 +189,6 @@ public class Client extends Application {
     private void logoutButtonHandle() {
       clientUI.close();
       Platform.exit();
-    }
-
-    private void toptenButtonHandle() {
-      sendToServer("migliori");
-      clientUI.clearNews();
-      for(int i=0;i<10;i++) {
-          String news=readLineFromServer();
-          if(news.equals("FINE")) break;
-          clientUI.addArticle(news);
-      }
     }
 
     private void addArticleButtonHandle() {
