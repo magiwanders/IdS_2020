@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/secondaprovainitinere/src/javafx/lib/javafx.media.jar!/" />
+      <root url="jar://$PROJECT_DIR$/secondaprovainitinere/src/javafx/lib/javafx-swt.jar!/" />
+      <root url="jar://$PROJECT_DIR$/secondaprovainitinere/src/javafx/lib/javafx.controls.jar!/" />
+      <root url="jar://$PROJECT_DIR$/secondaprovainitinere/src/javafx/lib/javafx.graphics.jar!/" />
+      <root url="jar://$PROJECT_DIR$/secondaprovainitinere/src/javafx/lib/src.zip!/" />
+      <root url="jar://$PROJECT_DIR$/secondaprovainitinere/src/javafx/lib/javafx.swing.jar!/" />
+      <root url="jar://$PROJECT_DIR$/secondaprovainitinere/src/javafx/lib/javafx.base.jar!/" />
+      <root url="jar://$PROJECT_DIR$/secondaprovainitinere/src/javafx/lib/javafx.web.jar!/" />
+      <root url="jar://$PROJECT_DIR$/secondaprovainitinere/src/javafx/lib/javafx.fxml.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
