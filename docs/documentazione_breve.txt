@@ -1,0 +1,61 @@
+Contenuto del file:
+
+  1. Modifica codice del primo parziale
+  2. Criteri test JUnit
+  3. Directory del secondo parziale
+
+
+
+
+
+1. MODIFICA CODICE DEL PRIMO PARZIALE
+
+Il codice delle classi consegnate per il primo parziale è stato modificato,
+seppure in maniera estremamente marginale. In particolare:
+
+    - In tutte le classi è stato aggiunto il package (per semplificare il testing con JUnit)
+    - Comment.java
+        - è stato aggiunto il metodo toString() per maggiore "correttezza concettuale."
+    - Connection.java
+        - :194 viene ora utilizzato Comment:toString().
+        - l'implementazione di viewTenBest() e getBestDiscussion() è stata cambiata in favore
+          di una soluzione più elegante che spreca meno memoria. (la discussionsList non
+          viene più clonata per intero)
+    - CredentialsList.java & Server.java
+        - Mi è sembrato più concettualmente corretto e sicuro lasciar inizializzare la lista
+          predefinita di utenti alla classe CredentialsList e le discussioni alla classe
+          Server, per cui ho diviso il codice tra le due. Come conseguenza ho rimosso tutti
+          i costruttori aggiuntivi di CredentialsList, non più utilizzati, e spostato il
+          codice di inizializzazione nelle rispettive classi.
+    - Server.java
+        - Il compilato Server.class nella prima prova in itinere era stato consegnato con la
+          variabile "initialize=true" di default. Nel secondo parziale viene consegnato
+          compilato con "initialize=false" poichè è un'ipotesi del test globale. Il codice
+          per l'inizializzazione è rimasto invariato per cui basta ricompilare con
+          "initialize=true" nel caso si voglia testare il client GUI con già qualche discussione
+          inserita (oppure utilizzare Server_initialized.class).
+
+
+2. CRITERI TEST JUnit
+
+Le classi di test sono state scritte in quest'ordine:
+  1. CommentTest.java
+  2. DiscussionTest.java
+  3. CredentialsListTest.java
+  4. ServerTest.java
+  5. ServerTests.java
+
+Dopo aver eseguito i test singoli sulla struttura dati (1-3) sono passato a un test globale (4), 
+per finire con (5), suite che esegue (1-4).
+
+====IMPORTANTE==== È necessario eseguire il Server subito prima di eseguire il test. È anche necessario
+che il server NON sia inizializzato (variabile initialize=false in Server.java:21)
+
+
+
+3. DIRECTORY DEL SECONDO PARZIALE
+
+Il contenuto del secondo parziale è frammentato per cui metto qui un breve indice:
+  - Il client GUI è in secondaprovainitinere/src
+  - I test per il Server sono in primaprovainitinere/test
+  - Il class diagram e il sequence diagram sono in docs (la stessa directory di questo file)

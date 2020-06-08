@@ -18,7 +18,7 @@ public class Server
     private CredentialsList users; // Oggetto che contiene e gestisce users e passwords.
     private Vector<Discussion> discussionsList; // Lista di tutte le discussioni disponibili.
 
-    private final static boolean initialize = false; // True se si vuole un certo numero di discussioni e utenti già inseriti.
+    private final static boolean initialize = true; // True se si vuole un certo numero di discussioni e utenti già inseriti.
 
 
     // COSTRUTTORE
