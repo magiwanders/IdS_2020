@@ -99,11 +99,17 @@ public class ClientUI extends Stage {
       commentContainer.setMinHeight(300);
   }
 
-  public Button getAddArticleButton() {
-    return addArticle;
+
+
+  public void clearNews() {
+    listContainer.getItems().clear();
   }
 
-  public void addArticle(String content) {
+  public void clearComments() {
+    comments.getChildren().clear();
+  }
+
+  public void addArticle(String content) { // Aggiunta si intende all'interfaccia utente
     listContainer.getItems().add(content);
   }
 
@@ -114,66 +120,6 @@ public class ClientUI extends Stage {
   public void showAddCommentButton() {
     comments.getChildren().add(addComment);
     addComment.setVisible(true);
-  }
-
-  public Button getLogoutButton() {
-    return logout;
-  }
-
-  public RadioButton getTopTenButton() {
-    return showTopTen;
-  }
-
-  public RadioButton getShowListButton() {
-    return showList;
-  }
-
-  public Button getAddButton() {
-    return addArticle;
-  }
-
-  public Button getAddCommentButton() {
-    return addComment;
-  }
-
-  public int getLastArticle() {
-    return listContainer.getItems().size();
-  }
-
-  public void clearNews() {
-    listContainer.getItems().clear();
-  }
-
-  public void clearComments() {
-    comments.getChildren().clear();
-  }
-
-  public ListView getList() {
-    return listContainer;
-  }
-
-  public int updateSelectedArticle() {
-    try {
-      String current = listContainer.getSelectionModel().getSelectedItem();
-      int currentNumber = indexOf(current);
-      setSelected(currentNumber);
-      return indexOf(current);
-    } catch (Exception e) {
-      selectedArticle.setText("1");
-      return 1;
-    }
-  }
-
-  public int getSelectedArticle() {
-    return Integer.parseInt(selectedArticle.getText());
-  }
-
-  public int indexOf(String current) {
-    return Integer.parseInt(current.substring(current.indexOf("^")+1, current.indexOf("]")));
-  }
-
-  public void setSelected(int selected) {
-    selectedArticle.setText(Integer.toString(selected));
   }
 
   public void showEdit() {
@@ -189,8 +135,64 @@ public class ClientUI extends Stage {
     selectedArticle.setText("1");
   }
 
+  public int indexOf(String current) { // Estrae il numero della Discussione così come visualizzato dall'utente.
+    return Integer.parseInt(current.substring(current.indexOf("^")+1, current.indexOf("]")));
+  }
+
+  public void setSelected(int selected) {
+    selectedArticle.setText(Integer.toString(selected));
+  }
+
   public boolean isDisplayingTopTen() {
     return showTopTen.isSelected();
   }
+
+  public int updateSelectedArticle() {
+    try {
+      String current = listContainer.getSelectionModel().getSelectedItem();
+      int currentNumber = indexOf(current);
+      setSelected(currentNumber);
+      return indexOf(current);
+    } catch (Exception e) {
+      selectedArticle.setText("1");
+      return 1;
+    }
+  }
+
+
+
+  public Button getAddArticleButton() {
+    return addArticle;
+  }
+
+  public Button getLogoutButton() {
+    return logout;
+  }
+
+  public RadioButton getTopTenButton() {
+    return showTopTen;
+  }
+
+  public RadioButton getShowListButton() {
+    return showList;
+  }
+
+  public Button getAddCommentButton() {
+    return addComment;
+  }
+
+  public int getLastArticle() {
+    return listContainer.getItems().size();
+  }
+
+  public ListView getList() {
+    return listContainer;
+  }
+
+  public int getSelectedArticle() {
+    return Integer.parseInt(selectedArticle.getText());
+  }
+
+
 
 }

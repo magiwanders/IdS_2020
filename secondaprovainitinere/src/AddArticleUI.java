@@ -25,10 +25,6 @@ public class AddArticleUI extends TwoFieldsWindow {
     return super.getTextField2();
   }
 
-  public Label getErrorLabel() {
-    return super.getErrorLabel();
-  }
-
   public Button getAddButton() {
     return super.getButton();
   }

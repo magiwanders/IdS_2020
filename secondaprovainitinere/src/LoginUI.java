@@ -21,11 +21,7 @@ public class LoginUI extends TwoFieldsWindow {
   public String getPassword() {
     return super.getTextField2();
   }
-
-  public Label getErrorLabel() {
-    return super.getErrorLabel();
-  }
-
+  
   public Button getLoginButton() {
     return super.getButton();
   }

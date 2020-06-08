@@ -24,11 +24,7 @@ public class AddCommentUI extends TwoFieldsWindow {
   public String getBody() {
     return super.getTextField2();
   }
-
-  public Label getErrorLabel() {
-    return super.getErrorLabel();
-  }
-
+  
   public Button getLeaveButton() {
     return super.getButton();
   }

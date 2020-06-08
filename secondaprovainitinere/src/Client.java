@@ -87,7 +87,7 @@ public class Client extends Application {
       clientUI = new ClientUI(); // Finestra client.
       showNewsList();
       clientUI.getLogoutButton().setOnAction( (e1) -> logoutButtonHandle());
-      clientUI.getAddButton().setOnAction( (e2) -> addArticleButtonHandle());
+      clientUI.getAddArticleButton().setOnAction( (e2) -> addArticleButtonHandle());
       clientUI.getTopTenButton().setOnAction( (e3) -> topTenButtonHandle());
       clientUI.getShowListButton().setOnAction( (e4) -> showListButtonHandle());
       clientUI.getList().setOnMouseClicked( (e5) -> listHandle());
