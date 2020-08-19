@@ -1,6 +1,8 @@
-// export PATH_TO_FX=secondaprovainitinere/src/javafx/lib
-// javac --module-path $PATH_TO_FX --add-modules javafx.controls secondaprovainitinere/src/Client.java
-// java --module-path $PATH_TO_FX --add-modules javafx.controls secondaprovainitinere.src.Client
+/*
+ export PATH_TO_FX=secondaprovainitinere/src/javafx/lib
+ javac --module-path $PATH_TO_FX --add-modules javafx.controls secondaprovainitinere/src/Client.java
+ java --module-path $PATH_TO_FX --add-modules javafx.controls secondaprovainitinere.src.Client
+*/
 package secondaprovainitinere.src;
 
 import javafx.application.*;

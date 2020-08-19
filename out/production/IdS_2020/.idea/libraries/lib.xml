@@ -1,0 +1,19 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="file://$USER_HOME$/intellij/javafx/lib" />
+    </CLASSES>
+    <JAVADOC />
+    <NATIVE>
+      <root url="file://$USER_HOME$/intellij/javafx/lib" />
+    </NATIVE>
+    <SOURCES>
+      <root url="file://$USER_HOME$/intellij/javafx/lib/javafx.base" />
+      <root url="file://$USER_HOME$/intellij/javafx/lib/javafx.fxml" />
+      <root url="file://$USER_HOME$/intellij/javafx/lib/javafx.web" />
+      <root url="file://$USER_HOME$/intellij/javafx/lib" />
+    </SOURCES>
+    <jarDirectory url="file://$USER_HOME$/intellij/javafx/lib" recursive="false" />
+    <jarDirectory url="file://$USER_HOME$/intellij/javafx/lib" recursive="false" type="SOURCES" />
+  </library>
+</component>
